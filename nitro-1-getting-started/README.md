@@ -22,7 +22,7 @@ Scroll down and you will find the **NITRO section** with the SDK and documentati
 
 ![](./img/image37.png)
 
-  1.       We can head to the NetScaler NITRO REST API Documentation by opening the index.html page within the documentation you extracted. Here we can see the Getting Started Guide, as well as the sidebar that contains the REST resources available to us via the API.
+3.  We can head to the NetScaler NITRO REST API Documentation by opening the index.html page within the documentation you extracted. Here we can see the Getting Started Guide, as well as the sidebar that contains the REST resources available to us via the API.
 
 ![](./img/image38.png)
 
@@ -78,73 +78,65 @@ Finishing our request, we will select **Body and Raw** as our payload and enter 
 
 #### Exercise 2.4: Save NetScaler’s Configuration
 
-1.       ***Save Configuration***
+1. Within the **NetScaler API Docs** head to **Configuration -&gt; NS -&gt; nsconfig** and scroll down to find the **save method**. Make note of the same fields as above: **URL, HTTP Method, HTTP Params, and payload**.
 
-Within Google Chrome head to the **NetScaler API Docs**. Head to **Configuration -&gt; NS -&gt; nsconfig** and scroll down to find the **save method**. Make note of the same fields as above: **URL, HTTP Method, HTTP Params, and payload**.
-
-![](./img/image47.png){width="5.375in" height="3.3001388888888887in"}
+![](./img/image47.png)
 
 Build your request by clicking the **Plus (+)** in Postman to save the configuration of the NetScaler using the resources you took note of above. Enter [**http://ns3.training.lab/nitro/v1/config/nsconfig**](http://ns3.training.lab/nitro/v1/config/nsconfig) as your **request URL** and **HTTP Method** of **POST**. This time be sure to select **Params and Headers** as we need to pass both to NITRO with this request as per the documentation. Enter a **Param Key** of **action** with the value of **save** add a **Header** key of **Content-Type** with the value of **application/json** Finally, select **Body and** **raw** as the payload and enter the data of:
 
+```json
 {
+  "nsconfig":
+  {
 
-"nsconfig":
-
-{
-
+  }
 }
+```
 
-}
+![](./img/image48.png)
 
-  1.       ![](./img/image48.png){width="5.461376859142607in" height="2.6354166666666665in"}
+![](./img/image49.png)
 
-![](./img/image49.png){width="5.336977252843394in" height="1.6770833333333333in"}
+2. Send the request to save the configuration by clicking **Send**. You can verify that the request was successful by looking at the **HTTP status of 200 OK**.
 
-  1.       Send the request to save the configuration by clicking **Send**. You can verify that the request was successful by looking at the **HTTP status of 200 OK**.
-
-![](./img/image50.png){width="5.891666666666667in" height="4.182638888888889in"}
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+![](./img/image50.png)
 
 #### Exercise 2.5: Logout
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  > Step   Action
-  -------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  1.       ***Logout***
+1. The next step is to logout or disconnect from the NetScaler. First we look up the documentation in the **Getting Started Guide**. In the guide, we will look for disconnecting from the appliance. Here we make note of the **URL, HTTP Method, Request Header, and payload.** *(pg.29)*
 
-The next step is to logout or disconnect from the NetScaler. First we look up the documentation in the **Getting Started Guide**. In the guide, we will look for disconnecting from the appliance. Here we make note of the **URL, HTTP Method, Request Header, and payload.** *(pg.29)*
-
-![](./img/image51.png){width="5.40625in" height="3.801707130358705in"}
+![](./img/image51.png)
 
 We enter [**http://ns3.training.lab/nitro/v1/config/logout**](http://ns3.training.lab/nitro/v1/config/logout) as the **request URL** and the **HTTP Method of POST**. Be sure to select headers and add a key of **Content-Type** and value of **application/json** Finally, we will select **Body and raw** as our payload type and set the data of:
 
-{"logout":
-
+```json
 {
+  "logout":
+  {
 
+  }
 }
+```
 
-}
+Click on **Send** and verify that the logout occurred by receiving a **201 Created as your HTTP Status.**
 
-Click on **Send** and verify that the logout occurred by receiving a **201 Created as your HTTP Status. **
+![](./img/image52.png)
 
-  1.       ![](./img/image52.png){width="4.896516841644795in" height="1.5210454943132108in"}
-
-![](./img/image53.png){width="4.708333333333333in" height="3.8276017060367455in"}
+![](./img/image53.png)
 
 **Click Send again and you receive a 401 Unauthorized – Why does this occur?**
 
-![](./img/image54.png){width="2.53125in" height="2.806385608048994in"}
+![](./img/image54.png)
 
-*401 Unauthorized shows that we are not currently logged in (IE: The cookie sessionid is *not* set and/or not valid) and we are not allowed to perform a NITRO command without logging in first.*
+> 401 Unauthorized shows that we are not currently logged in (IE: The cookie sessionid is *not* set and/or not valid) and we are not allowed to perform a NITRO command without logging in first.
 
-  1.       ***Challenge! Reboot the NetScaler using NITRO***
+2. ***Challenge! Reboot the NetScaler using NITRO***
 
 Using the API documentation at **Configuration -&gt; NS -&gt; Reboot** build the request to ***warmly*** reboot your NetScaler and send it to NS3.training.lab. You will be using the reboot method and be sure set **warm: true**
 
-![](./img/image55.png){width="5.891666666666667in" height="2.6006944444444446in"}
+![](./img/image55.png)
 
-Also, the return value should be a 200 or 201. The API can and will send return values or HTTP status codes per request, verify that the NetScaler rebooted via either firing up XenCenter and checking the NS3 console, or opening CMD and pinging ns3.training.lab.
+Also, the return value should be a 200 or 201. The API can and will send return values or HTTP status codes per request, verify that the NetScaler reboote.
 
 ***Hints below!***
 
@@ -154,9 +146,9 @@ You might need to clear the cookies in Postman using the troubleshooting step ou
 
 Hint 2: (copy and pasting might mess up formatting for “ ” characters, try to type it out)
 
-Your payload information will be **{"reboot": {"warm": true}}**
+Your payload information will be `{"reboot": {"warm": true}}`
 
-*Note: Remember, whitespace in JSON doesn’t matter.*
+> Note: Remember, whitespace in JSON doesn’t matter.
 
 Hint 3:
 
@@ -168,11 +160,8 @@ Your URL will be <http://ns3.training.lab/nitro/v1/config>/reboot with the HTTP 
 
 Hint 5:
 
-Be sure to set that Content-Type header correctly! (*application/json)*
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Be sure to set that Content-Type header correctly! *(application/json)*
 
 ### Exercise Summary
 
-In this exercise, you connected to NetScaler using the NITRO API. We
-performed logging in, logging out, saving the configuration, and
-rebooting the appliance.
+In this exercise, you connected to NetScaler using the NITRO API. We performed logging in, logging out, saving the configuration, and rebooting the appliance.
