@@ -8,7 +8,7 @@ In this exercise, you will get started and familiar with RESTful services within
 
 1. Open a new window in Google Chrome and head to [https://httpbin.org/](https://httpbin.org/)
 
-> Note: some images in this guide reference tools.tools.training.lab, please be sure to subsitute this URL for httpbin.org
+> Note: some images in this guide reference tools.training.lab, please be sure to subsitute this URL for httpbin.org
 
 2. Open the **Google Chrome Developer Tools** by clicking on the **menu at the top right** of the browser and heading to **More tools**, followed by **Developer tools.**
 
@@ -112,7 +112,4 @@ Click **Send**. Verify that the HTTP STATUS returned is a **200 OK** and the **p
 
 ## Summary
 
-In this exercise, you could utilize HTTP-Bin, Google Chrome, and Postman
-to become familiar with RESTful services and the tools that we will be
-utilizing in this lab. If you wish, take a moment to explore the other
-endpoints and items in the postman collection.
+In this exercise, you could utilize HTTP-Bin, Google Chrome, and Postman to become familiar with RESTful services and the tools that we will be utilizing in this lab. If you wish, take a moment to explore the other endpoints and items in the postman collection.

@@ -3,8 +3,9 @@
 ## Overview
 
 In this exercise, you will begin to get familiar with the RESTful
-NetScaler NITRO API.
+NetScaler NITRO API.  This lab will assume you have access to a NetScaler system.  If you do not please head to http://citrix.com/netscaler and set up one for this lab.  
 
+You will need to substitue `netscalerURL` in each URL with your own NetScaler IP Address.
 
 ## Exercise 1: The NetScaler NITRO Documentation
 
@@ -18,7 +19,7 @@ Scroll down and you will find the **NITRO section** with the SDK and documentati
 
 ![](./img/image36.png)
 
-2.  Logout of NS3 by selecting **nsroot** at the top right dropdown and selecting **Logout**.
+2.  Logout of NetScaler by selecting **nsroot** at the top right dropdown and selecting **Logout**.
 
 ![](./img/image37.png)
 
@@ -30,9 +31,9 @@ The documentation will be your go-to place for all information relating to the N
 
 ![](./img/image39.png)
 
-> Info   *This is not necessary now, but at any time responses to your requests get hung up or stuck and you are sure you have the request correct, it is a good troubleshooting step to close and reopen postman, and then perform a logout followed by a login.*
+> Info: This is not necessary now, but at any time responses to your requests get hung up or stuck and you are sure you have the request correct, it is a good troubleshooting step to close and reopen postman, and then perform a logout followed by a login.
 
-#### Exercise 2.3: Login to NetScaler
+## Exercise 2: Login to NetScaler
 
 1.  Our first step in any and every interaction with NITRO is to perform a login to authenticate our user. In this step, we will head to the **Getting Started Guide and go to page 5**, which contains all the NITRO login information to build our REST request. Make note of the **URL, Method, Headers, and Payload** as we will use this information in the next step.
 
@@ -40,13 +41,14 @@ The documentation will be your go-to place for all information relating to the N
 
 ![](./img/image41.png)
 
-2. ***Login*** In this step, we will perform a login to the NetScaler. To do so open **Postman** and click on the **Plus (+) button**.  Enter [**http://ns3.training.lab/nitro/v1/config/login**](http://ns3.training.lab/nitro/v1/config/login) as the **request URL** and set the **HTTP Method** to **POST** as the documentation above states. Select **Headers,** if not already selected, and add a **key** of **Content-Type** and **value** of **application/json**
+2. ***Login*** In this step, we will perform a login to the NetScaler. To do so open **Postman** and click on the **Plus (+) button**.  Enter `http://netscalerURL/nitro/v1/config/login` as the **request URL** and set the **HTTP Method** to `POST` as the documentation above states. Select **Headers,** if not already selected, and add a **key** of `Content-Type` and **value** of `application/json`
 
 > Note: The Content-Type header is an important field when performing a HTTP POST and PUT to NITRO and it needs to be present (HTTP GET and DELETE are a different subject and we will detail them later). When performing, these operations be sure to include this header, with the appropriate value of application/json. It is important to note that the PDF getting started guide lists the appropriate value for this method of application/vnd.com.citrix.netscaler.login+json, and while that value will work it is best practice to utilize application/json in every request.
 
 > Also, remember that whitespace in JSON is not vital, but double quotes, commas, colons, and brackets are.
 
 Finishing our request, we will select **Body and Raw** as our payload and enter the data of:
+
 ```json
 {
   "login":
@@ -57,6 +59,8 @@ Finishing our request, we will select **Body and Raw** as our payload and enter 
   }
 }
 ```
+
+> Be sure to substitue the appropriate username and password for your NetScaler.
 
 ![](./img/image42.png)
 
@@ -73,16 +77,18 @@ Finishing our request, we will select **Body and Raw** as our payload and enter 
 >> Click on the **Cookies** link in the request box next to the Save button. Find all instances of **sessionid** and click the **X** next to it to delete all of them. Close the box and try your request again by clicking **Send**.
 
 > Troubleshooting step images, if needed:
+>
 > ![](./img/image45.png)
+> 
 > ![](./img/image46.png)
 
-#### Exercise 2.4: Save NetScaler’s Configuration
+## Exercise 3: Save NetScaler’s Configuration
 
 1. Within the **NetScaler API Docs** head to **Configuration -&gt; NS -&gt; nsconfig** and scroll down to find the **save method**. Make note of the same fields as above: **URL, HTTP Method, HTTP Params, and payload**.
 
 ![](./img/image47.png)
 
-Build your request by clicking the **Plus (+)** in Postman to save the configuration of the NetScaler using the resources you took note of above. Enter [**http://ns3.training.lab/nitro/v1/config/nsconfig**](http://ns3.training.lab/nitro/v1/config/nsconfig) as your **request URL** and **HTTP Method** of **POST**. This time be sure to select **Params and Headers** as we need to pass both to NITRO with this request as per the documentation. Enter a **Param Key** of **action** with the value of **save** add a **Header** key of **Content-Type** with the value of **application/json** Finally, select **Body and** **raw** as the payload and enter the data of:
+Build your request by clicking the **Plus (+)** in Postman to save the configuration of the NetScaler using the resources you took note of above. Enter `http://netscalerURL/nitro/v1/config/nsconfig` as your **request URL** and **HTTP Method** of `POST`. This time be sure to select **Params and Headers** as we need to pass both to NITRO with this request as per the documentation. Enter a **Param Key** of `action` with the value of `save` add a **Header** key of `Content-Type` with the value of `application/json` Finally, select **Body** and **raw** as the payload and enter the data of:
 
 ```json
 {
@@ -101,13 +107,13 @@ Build your request by clicking the **Plus (+)** in Postman to save the configura
 
 ![](./img/image50.png)
 
-#### Exercise 2.5: Logout
+## Exercise 4: Logout
 
 1. The next step is to logout or disconnect from the NetScaler. First we look up the documentation in the **Getting Started Guide**. In the guide, we will look for disconnecting from the appliance. Here we make note of the **URL, HTTP Method, Request Header, and payload.** *(pg.29)*
 
 ![](./img/image51.png)
 
-We enter [**http://ns3.training.lab/nitro/v1/config/logout**](http://ns3.training.lab/nitro/v1/config/logout) as the **request URL** and the **HTTP Method of POST**. Be sure to select headers and add a key of **Content-Type** and value of **application/json** Finally, we will select **Body and raw** as our payload type and set the data of:
+We enter `http://netscalerURL/nitro/v1/config/logout` as the **request URL** and the **HTTP Method of POST**. Be sure to select headers and add a key of `Content-Type` and value of `application/json` Finally, we will select **Body and raw** as our payload type and set the data of:
 
 ```json
 {
@@ -132,11 +138,11 @@ Click on **Send** and verify that the logout occurred by receiving a **201 Creat
 
 2. ***Challenge! Reboot the NetScaler using NITRO***
 
-Using the API documentation at **Configuration -&gt; NS -&gt; Reboot** build the request to ***warmly*** reboot your NetScaler and send it to NS3.training.lab. You will be using the reboot method and be sure set **warm: true**
+Using the API documentation at **Configuration -&gt; NS -&gt; Reboot** build the request to ***warmly*** reboot your NetScaler and send it to netscalerURL. You will be using the reboot method and be sure set **warm: true**
 
 ![](./img/image55.png)
 
-Also, the return value should be a 200 or 201. The API can and will send return values or HTTP status codes per request, verify that the NetScaler reboote.
+Also, the return value should be a 200 or 201. The API can and will send return values or HTTP status codes per request, verify that the NetScaler reboots.
 
 ***Hints below!***
 
@@ -156,12 +162,12 @@ Are you logged in?
 
 Hint 4:
 
-Your URL will be <http://ns3.training.lab/nitro/v1/config>/reboot with the HTTP Method of POST
+Your URL will be <http://netscalerURL/nitro/v1/config>/reboot with the HTTP Method of POST
 
 Hint 5:
 
-Be sure to set that Content-Type header correctly! *(application/json)*
+Be sure to set that Content-Type header correctly! `application/json`
 
-### Exercise Summary
+## Exercise Summary
 
 In this exercise, you connected to NetScaler using the NITRO API. We performed logging in, logging out, saving the configuration, and rebooting the appliance.
